@@ -32,3 +32,6 @@ export const getNameInitials = (user: IUser) => {
 	const lastNameInitial = user?.lastName.charAt(0);
 	return `${firstNameInitial}${lastNameInitial}`;
 };
+
+export const formatNumber = (value: number) =>
+	new Intl.NumberFormat().format(value);

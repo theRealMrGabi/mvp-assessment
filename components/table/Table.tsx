@@ -2,7 +2,11 @@ import { FC } from "react";
 import styles from "./Table.module.scss";
 
 interface TableProps {
-	header: any;
+	header: {
+		title: string;
+		key: string;
+		component?: (item: any) => JSX.Element;
+	}[];
 	data?: any;
 	loading?: boolean;
 	error?: null;

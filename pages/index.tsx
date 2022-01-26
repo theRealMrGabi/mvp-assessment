@@ -1,6 +1,4 @@
 import { FC } from "react";
-import { useQuery } from "react-query";
-import { apiService } from "@services/apiService";
 import {
 	Layout,
 	Button,
@@ -8,20 +6,15 @@ import {
 	Select,
 	EmptyScreen,
 	AllProjects,
+	LoadingSpinner,
 } from "@components";
+import { useDataSourceContext, useReportsContext } from "@contexts";
 
 const Home: FC = () => {
-	const { data: projects, isLoading: projectLoading } = useQuery({
-		queryKey: "projects",
-		queryFn: () => apiService.get(`projects`),
-		refetchOnWindowFocus: false,
-	});
-
-	const { data: gateways, isLoading: gatewaysLoading } = useQuery({
-		queryKey: "gateways",
-		queryFn: () => apiService.get(`gateways`),
-		refetchOnWindowFocus: false,
-	});
+	const { projects, gateways, projectLoading, gatewaysLoading } =
+		useDataSourceContext();
+	const { reports, reportLoading, handleParamsChange, handleSelect } =
+		useReportsContext();
 
 	const projectOptions = projects?.map((item: any) => {
 		const data = {
@@ -33,7 +26,7 @@ const Home: FC = () => {
 
 	const gatewayOptions = gateways?.map((item: any) => {
 		const data = {
-			value: item.projectId,
+			value: item.gatewayId,
 			label: item.name,
 		};
 		return data;
@@ -55,8 +48,11 @@ const Home: FC = () => {
 							<Select
 								options={projectOptions}
 								placeholder="All projects"
-								name="projects"
+								name="projectId"
 								disabled={projectLoading}
+								onChange={({ value }: any) =>
+									handleSelect({ name: "projectId", value })
+								}
 							/>
 						</div>
 
@@ -64,26 +60,31 @@ const Home: FC = () => {
 							<Select
 								options={gatewayOptions}
 								placeholder="All gateways"
-								name="gateways"
+								name="gatewayId"
 								disabled={gatewaysLoading}
+								onChange={({ value }: any) =>
+									handleSelect({ name: "gatewayId", value })
+								}
 							/>
 						</div>
 
 						<div>
 							<Input
 								type="date"
-								name="fromDate"
+								name="from"
 								placeholder="From date"
 								label="From Date"
+								onChange={handleParamsChange}
 							/>
 						</div>
 
 						<div>
 							<Input
 								type="date"
-								name="toDate"
+								name="to"
 								placeholder="To date"
 								label="To Date"
+								onChange={handleParamsChange}
 							/>
 						</div>
 
@@ -94,11 +95,18 @@ const Home: FC = () => {
 				</div>
 
 				<div className="mt-6">
-					{/* <EmptyScreen /> */}
-					<AllProjects />
+					{reportLoading ? (
+						<div className="grid h-[40vh] place-content-center md:h-[60vh]">
+							<LoadingSpinner />
+						</div>
+					) : !!reports?.length ? (
+						<AllProjects />
+					) : (
+						<EmptyScreen />
+					)}
 				</div>
 
-				<div className="mt-10 mb-6">
+				<div className={!!reports?.length ? "mt-10 mb-6" : "absolute bottom-5"}>
 					<a href="#" className="mb-auto font-bold text-base-blue-100">
 						Terms &#38; Conditions | Privacy policy
 					</a>

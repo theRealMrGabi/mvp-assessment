@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Provider } from "@contexts";
 import "../styles/global.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -9,7 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ReactQueryDevtools initialIsOpen={false} />
-			<Component {...pageProps} />
+			<Provider>
+				<Component {...pageProps} />
+			</Provider>
 		</QueryClientProvider>
 	);
 }

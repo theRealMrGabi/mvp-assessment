@@ -1,6 +1,7 @@
 export * from "./Button";
 export * from "./Input";
 export * from "./Layout";
+export * from "./LoadingSpinner";
 export * from "./Meta";
 export * from "./Header";
 export * from "./Sidebar";

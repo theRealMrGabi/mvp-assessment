@@ -6,7 +6,7 @@ interface SelectProps {
 		value: string;
 		label: string;
 	}[];
-	onChange?: () => void;
+	onChange?: ({ value }: any) => void;
 	placeholder?: string;
 	height?: string;
 	label?: string;
