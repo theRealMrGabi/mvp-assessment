@@ -6,7 +6,7 @@ import { apiService } from "@services/apiService";
 import { getNameInitials } from "@utils";
 
 export const Header: FC = () => {
-	const { data: users, isLoading } = useQuery({
+	const { data: users } = useQuery({
 		queryKey: "users",
 		queryFn: () => apiService.get(`users`),
 		refetchOnWindowFocus: false,

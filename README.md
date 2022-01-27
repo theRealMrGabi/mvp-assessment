@@ -1,23 +1,22 @@
-## Next.js Base
+## MVP Assessment
 
-This is a NextJS Starter template
+This is a custom NextJS Starter template
 
 ### Includes Configuration for Sustainable Development
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-The additional configuration includes:
+This project is built with :
 
 - TailwindCSS
-  -React Query (Cache Server data and make Api Request)
 - Linting with ESLint
-- Testing with Jest & Testing Library React
+- React Query (Cache Server data and make Api Request)
 - Aliased Paths/Absolute Imports.
-- react-hook-form (works like formik but more optimized)
-- Yup (validation)
+- Axios
+- React-Select
 - Cogo-toast (Display toast notification)
-- @hookform/resolvers (Allows you use Yup with react-hook-form)
-- Jest and @testing-library/react
+- Recharts (Graph, Chart)
+- Sass
 
 ## Getting Started
 

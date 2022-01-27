@@ -17,6 +17,8 @@ interface DataSourceContextProps {
 	setGateways: Dispatch<SetStateAction<never[]>>;
 	projectLoading: boolean;
 	gatewaysLoading: boolean;
+	generateReport: boolean;
+	setGenerateReport: Dispatch<SetStateAction<boolean>>;
 }
 
 export const DataSourceContext = createContext<
@@ -30,6 +32,7 @@ export const DataSourceProvider = ({
 
 	const [projects, setProjects] = useState([]);
 	const [gateways, setGateways] = useState([]);
+	const [generateReport, setGenerateReport] = useState(false);
 
 	const { data: projectsData, isLoading: projectLoading } = useQuery({
 		queryKey: "projects",
@@ -56,6 +59,8 @@ export const DataSourceProvider = ({
 			setGateways,
 			projectLoading,
 			gatewaysLoading,
+			generateReport,
+			setGenerateReport,
 		}),
 		[
 			projects,
@@ -64,6 +69,8 @@ export const DataSourceProvider = ({
 			setGateways,
 			projectLoading,
 			gatewaysLoading,
+			generateReport,
+			setGenerateReport,
 		]
 	);
 

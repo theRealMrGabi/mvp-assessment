@@ -11,8 +11,13 @@ import {
 import { useDataSourceContext, useReportsContext } from "@contexts";
 
 const Home: FC = () => {
-	const { projects, gateways, projectLoading, gatewaysLoading } =
-		useDataSourceContext();
+	const {
+		projects,
+		gateways,
+		projectLoading,
+		gatewaysLoading,
+		setGenerateReport,
+	} = useDataSourceContext();
 	const { reports, reportLoading, handleParamsChange, handleSelect } =
 		useReportsContext();
 
@@ -89,7 +94,10 @@ const Home: FC = () => {
 						</div>
 
 						<div className="pt-6">
-							<Button text="Generate report" />
+							<Button
+								text="Generate report"
+								onClick={() => setGenerateReport((value) => !value)}
+							/>
 						</div>
 					</div>
 				</div>
