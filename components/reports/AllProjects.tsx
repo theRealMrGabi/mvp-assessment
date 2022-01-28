@@ -11,7 +11,7 @@ export const AllProjects: FC = () => {
 	const filterData = useCallback(
 		(projectId: string) => {
 			const filter = reports?.filter(
-				(item: IReportsData) => item.projectId !== projectId
+				(item: IReportsData) => item.projectId === projectId
 			);
 			return filter;
 		},
@@ -22,8 +22,8 @@ export const AllProjects: FC = () => {
 		const filter = filterData(projectId).map((item: IReportsData, i) => {
 			const data = {
 				date: item.created,
-				gateway: `Gateway ${i + 1}`,
-				transactionID: item.gatewayId,
+				gateway: `Gateway ${item.gatewayId}`,
+				transactionID: item.paymentId,
 				amount: item.amount,
 			};
 			return data;
